@@ -33,6 +33,11 @@ jobs:
           path: ./spack
           fetch-depth: 1
 
+      - name: List installed packages 🔍
+        run: |
+          source spack/share/spack/setup-env.sh
+          spack find -lvvx
+
       - name: Build 🔨
         run: |
             source spack/share/spack/setup-env.sh
