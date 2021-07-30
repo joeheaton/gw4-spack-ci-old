@@ -1,0 +1,1 @@
+python@3.8.11 %gcc@9.3.0 +optimizations
