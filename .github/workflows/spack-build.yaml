@@ -1,4 +1,4 @@
-name: github pages
+name: spack build test
 
 on:
   push:
