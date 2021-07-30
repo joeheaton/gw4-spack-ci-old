@@ -29,7 +29,5 @@ jobs:
         run: |
             source spack/share/spack/setup-env.sh
             for file in ./recipes/specs/*; do
-              cat ${file} | while read line || [[ -n ${spec} ]]; do
-                spack install ${spec}
-              done
+              spack install $(<${file})
             done
