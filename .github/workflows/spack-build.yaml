@@ -1,0 +1,35 @@
+name: github pages
+
+on:
+  push:
+    paths-ignore:
+      - '*.md'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted]
+
+    steps:
+      - name: Checkout repo to ./recipes 🥣
+        uses: actions/checkout@v2
+        with:
+          path: ./recipes
+          fetch-depth: 1
+
+      - name: Checkout spack to ./spack 🥣
+        uses: actions/checkout@v2
+        with:
+          repository: spack/spack
+          ref: develop
+          path: ./spack
+          fetch-depth: 1
+
+      - name: Build 🔨
+        run: |
+            source spack/share/spack/setup-env.sh
+            for file in ./recipes/specs/*; do
+              cat ${file} | while read line || [[ -n ${spec} ]]; do
+                spack install ${spec}
+              done
+            done
