@@ -33,10 +33,15 @@ jobs:
           path: ./spack
           fetch-depth: 1
 
+      - name: List installed packages 🔍
+        run: |
+          source spack/share/spack/setup-env.sh
+          spack find -lvvx
+
       - name: Build 🔨
         run: |
             source spack/share/spack/setup-env.sh
             DIFF="$( cd recipes; git diff --name-only origin/main main specs )"
             for file in ${DIFF}; do
-              spack install $(<${file})
+              spack install --fail-fast $(<${file})
             done
