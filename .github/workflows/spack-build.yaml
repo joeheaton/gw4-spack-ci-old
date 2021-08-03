@@ -4,10 +4,13 @@ on:
   push:
     paths-ignore:
       - '*.md'
+  pull_request:
+    paths-ignore:
+      - '*.md'
   workflow_dispatch:
 
 jobs:
-  deploy:
+  test:
     runs-on: [self-hosted]
 
     steps:
@@ -28,6 +31,7 @@ jobs:
       - name: Build 🔨
         run: |
             source spack/share/spack/setup-env.sh
-            for file in ./recipes/specs/*; do
+            DIFF="$( git diff --name-only origin/main main recipes/specs )"
+            for file in ${DIFF}; do
               spack install $(<${file})
             done
