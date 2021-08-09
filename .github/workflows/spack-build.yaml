@@ -43,6 +43,8 @@ jobs:
       - name: Build 🔨
         run: |
             source spack/share/spack/setup-env.sh
-            for file in ./recipes/specs/*; do
-              spack install --fail-fast $(<${file})
+            for FILE in ./recipes/specs/*; do
+              while IFS='' read -r LINE || [ -n "${LINE}" ]; do
+                spack install --fail-fast ${LINE}
+              done < ${FILE}
             done
