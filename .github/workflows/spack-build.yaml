@@ -16,7 +16,10 @@ on:
 
 jobs:
   test:
-    runs-on: [self-hosted]
+    strategy:
+      matrix:
+        uarch: [uarch-tx2, uarch-a64fx]
+    runs-on: [self-hosted, ${{ matrix.node }}]
 
     steps:
       - name: Checkout repo to ./recipes 🥣
