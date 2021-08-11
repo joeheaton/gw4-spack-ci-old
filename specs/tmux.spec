@@ -1,1 +1,1 @@
-tmux %gcc@9.3.0
+tmux %gcc@11.2.0
