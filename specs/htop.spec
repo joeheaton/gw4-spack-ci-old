@@ -1,1 +1,1 @@
-htop %gcc@9.3.0
+htop %gcc@11.2.0
