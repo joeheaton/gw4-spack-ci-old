@@ -45,6 +45,8 @@ jobs:
             source spack/share/spack/setup-env.sh
             for FILE in ./recipes/specs/*; do
               while IFS='' read -r LINE || [ -n "${LINE}" ]; do
+                echo
+                echo "~ Running ${LINE}"
                 spack install --fail-fast ${LINE}
               done < ${FILE}
             done
